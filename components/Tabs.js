@@ -9,3 +9,40 @@
 //    <div class="tab">topic here</div>
 //
 // NOTE: you do _not_ need to install axios as it's included in the HTML via script element
+
+
+const data = axios.get ('https://lambda-times-backend.heroyuapp.com/topics');
+
+const newTab = (input) => {
+    const tab = document.createElement('div');
+
+    //classes
+
+    tab.classList.add('tab');
+
+    //content
+    tab.textContent = input;
+
+
+    return tab;
+}
+
+data.then (response => {
+    console.log(data);
+    console.log('res', response);
+
+    response.data.topics.array.forEach(item => {
+        const newTopic = newTab(item);
+        topics.appendChild(newTopic);
+
+        
+    });
+})
+
+
+data.catch(error => {
+    console.log('error: ', error);
+
+})
+
+const topics = document.querySelector ('.topics');
